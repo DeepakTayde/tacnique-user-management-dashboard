@@ -57,6 +57,7 @@ const UserTableView = () => {
     postUserData(data)
       .then((response) => {
         console.log('User data submitted successfully:', response.data);
+        alert('User data submitted successfully');
         // after submitting data to api, fetching again for dynamic behaviour
         fetchUsersData()
           .then((response) => setUsers(response.data))

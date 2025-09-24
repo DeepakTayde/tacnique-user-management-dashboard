@@ -24,6 +24,7 @@ const HeaderComponent = () => {
 
       postUserData(data).then((response) => {
         console.log('User added successfully:', response.data);
+        alert('User added successfully');
       }).catch((error) => {
         console.error('Error adding user:', error);
       })
