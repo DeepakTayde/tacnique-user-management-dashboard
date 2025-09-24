@@ -5,7 +5,7 @@ import UserPage from "./pages/UserPage";
 
 function App() {
   return (
-    <div className="min-h-screen bg-background  p-10 w-full">
+    <div className="min-h-screen bg-background  px-10 w-full">
       {/*Creating Header component for batter UI*/}
     <HeaderComponent/>  
     <UserPage/>

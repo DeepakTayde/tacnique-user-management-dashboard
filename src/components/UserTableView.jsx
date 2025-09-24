@@ -24,8 +24,8 @@ const UserTableView = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-secondary rounded-lg p-4 shadow">
-      <table className="min-w-full text-white text-left">
+    <div className="w-full h-full flex items-center justify-center bg-white rounded-lg p-4 shadow-lg">
+      <table className="min-w-full text-primary text-left">
         <thead>
           <tr>
             <th className="py-2 px-4 border">ID</th>
@@ -33,6 +33,8 @@ const UserTableView = () => {
             <th className="py-2 px-4 border">Last Name</th>
             <th className="py-2 px-4 border">Email</th>
             <th className="py-2 px-4 border">Department</th>
+            <th className="py-2 px-4 border text-center">Actions</th>
+
           </tr>
         </thead>
         <tbody>
@@ -47,6 +49,14 @@ const UserTableView = () => {
                 <td className="py-2 px-4 border">{lastName}</td>
                 <td className="py-2 px-4 border">{user.email}</td>
                 <td className="py-2 px-4 border">{user.company.name}</td>
+                <td className="py-2 px-4 border text-center">
+                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold shadow-lg py-1 px-2 rounded mr-2">
+                    Edit
+                  </button>
+                  <button className="bg-red-700 hover:bg-red-500 text-white font-bold py-1 px-2 shadow-lg rounded">
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}
