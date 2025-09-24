@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FilterPopup from "../components/FilterPopup";
 import SearchBar from "../components/SearchBar";
 import UserTableView from "../components/UserTableView";
+import { fetchUsersData } from "../services/api";
 
 const UserPage = () => {
+  const [users, setUsers] = useState([]);
+
+  // Fetching Users data using useEffect hook and setting it into local state users
+  useEffect(() => {
+    fetchUsersData()
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.error(error));
+  }, []);
+
+
   return (
     <>
       <div className=" min-h-screen py-2 w-full px-5 gap-4 flex flex-col">
@@ -18,7 +29,7 @@ const UserPage = () => {
           
         </div>
         <div className="flex align-center w-full min-h-screen">
-          <UserTableView/>
+          <UserTableView users = {users} setUsers={setUsers}/>
         </div>
       </div>
     </>

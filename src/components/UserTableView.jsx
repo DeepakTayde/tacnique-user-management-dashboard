@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { fetchUsersData, postUserData } from "../services/api";
+import React, { useState } from "react";
 import UserFormModal from "./UserFormModal";
 
-const UserTableView = () => {
-  const [users, setUsers] = useState([]);
+const UserTableView = ({users, setUsers}) => {
+
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
-  const [editSelectedUser, setEditSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
 
 
   // This is the Helper function that splits the full name into first name and last name
@@ -19,14 +18,8 @@ const UserTableView = () => {
 
   };
 
-  // Fetching Users data using useEffect hook and setting it into local state users
-  useEffect(() => {
-    fetchUsersData()
-      .then((response) => setUsers(response.data))
-      .catch((error) => console.error(error));
-  }, []);
 
-
+// This function returns user object with required fields only
   const getUserValue = (user) => {
     const { firstName, lastName } = getFistAndLastName(user.name);
     return {
@@ -38,37 +31,19 @@ const UserTableView = () => {
     };
   }
 
-  const hadleEditSelectedUser =(user) =>{
-    setEditSelectedUser(getUserValue(user));
+
+  // When user clicks on edit button, this function sets the selected user and opens the modal
+  const handleSelectedUser =(user) =>{
+    setSelectedUser(getUserValue(user));
     setIsUserModalOpen(true);
   }
+
+  // If user clicks on cancel or outside the modal, this function closed the modal and reset the selected user
   const handleCloseUserFormModal = () => {
     setIsUserModalOpen(false);
-    setEditSelectedUser(null);
+    setSelectedUser(null);
   }
 
-  const handleUserFormSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const userData = Object.fromEntries(formData.entries());
-    
-    const data = editSelectedUser ? { ...userData, id: editSelectedUser.id } : { ...userData, id: Date.now().toString() };
-
-    postUserData(data)
-      .then((response) => {
-        console.log('User data submitted successfully:', response.data);
-        alert('User data submitted successfully');
-        // after submitting data to api, fetching again for dynamic behaviour
-        fetchUsersData()
-          .then((response) => setUsers(response.data))
-          .catch((error) => console.error(error));
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-
-    handleCloseUserFormModal();
-  }
 
 
   return (
@@ -87,7 +62,8 @@ const UserTableView = () => {
         </thead>
         <tbody>
           {users.map((user) => {
-            // Destructuring first name and last name using  the helper function
+
+            // Destructuring first name and last name using  the helper function, because we need separate first name and last name in the table
             const { firstName, lastName } = getFistAndLastName(user.name);
 
             return (
@@ -98,7 +74,7 @@ const UserTableView = () => {
                 <td className="py-2 px-4 border">{user.email}</td>
                 <td className="py-2 px-4 border">{user.company.name}</td>
                 <td className="py-2 px-4 border text-center">
-                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold shadow-lg py-1 px-2 rounded mr-2" onClick={() => hadleEditSelectedUser(user) }>
+                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold shadow-lg py-1 px-2 rounded mr-2" onClick={() => handleSelectedUser(user) }>
                     Edit
                   </button>
                   <button className="bg-red-700 hover:bg-red-500 text-white font-bold py-1 px-2 shadow-lg rounded">
@@ -114,8 +90,7 @@ const UserTableView = () => {
        <UserFormModal
         isOpen={isUserModalOpen}
         onClose={handleCloseUserFormModal}
-        onSubmit={handleUserFormSubmit}
-        userValue={editSelectedUser}
+        userValue={selectedUser}
       /> 
     </div>
   );
