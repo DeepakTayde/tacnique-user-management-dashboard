@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import UserFormModal from './UserFormModal'
+import { postUserData } from '../services/api'
 
 
 // This HeaderComponent is used to display the header of the dashboard with a title and an "Add User" button.
@@ -17,10 +18,18 @@ const HeaderComponent = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const userData = Object.fromEntries(formData.entries());
-    // const data = {...userData, id: Date.now().toString()};
+    const data = {...userData, id: Date.now().toString()};
 
+    // Posting user data to the API
 
-    console.log('Form Data Submitted:', userData);
+      postUserData(data).then((response) => {
+        console.log('User added successfully:', response.data);
+      }).catch((error) => {
+        console.error('Error adding user:', error);
+      })
+
+  
+
     setIsUserModalOpen(false);
   }
   return (
