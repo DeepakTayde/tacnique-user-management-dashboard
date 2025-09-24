@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { fetchUsersData } from "../services/api";
+import { fetchUsersData, postUserData } from "../services/api";
+import UserFormModal from "./UserFormModal";
 
 const UserTableView = () => {
   const [users, setUsers] = useState([]);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [editSelectedUser, setEditSelectedUser] = useState(null);
 
 
   // This is the Helper function that splits the full name into first name and last name
@@ -22,6 +25,50 @@ const UserTableView = () => {
       .then((response) => setUsers(response.data))
       .catch((error) => console.error(error));
   }, []);
+
+
+  const getUserValue = (user) => {
+    const { firstName, lastName } = getFistAndLastName(user.name);
+    return {
+      id: user.id,
+      firstName,
+      lastName,
+      email: user.email,
+      department: user.company?.name  || "",
+    };
+  }
+
+  const hadleEditSelectedUser =(user) =>{
+    setEditSelectedUser(getUserValue(user));
+    setIsUserModalOpen(true);
+  }
+  const handleCloseUserFormModal = () => {
+    setIsUserModalOpen(false);
+    setEditSelectedUser(null);
+  }
+
+  const handleUserFormSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const userData = Object.fromEntries(formData.entries());
+    
+    const data = editSelectedUser ? { ...userData, id: editSelectedUser.id } : { ...userData, id: Date.now().toString() };
+
+    postUserData(data)
+      .then((response) => {
+        console.log('User data submitted successfully:', response.data);
+        // after submitting data to api, fetching again for dynamic behaviour
+        fetchUsersData()
+          .then((response) => setUsers(response.data))
+          .catch((error) => console.error(error));
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+    handleCloseUserFormModal();
+  }
+
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-white rounded-lg p-4 shadow-lg">
@@ -50,7 +97,7 @@ const UserTableView = () => {
                 <td className="py-2 px-4 border">{user.email}</td>
                 <td className="py-2 px-4 border">{user.company.name}</td>
                 <td className="py-2 px-4 border text-center">
-                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold shadow-lg py-1 px-2 rounded mr-2">
+                  <button className="bg-blue-700 hover:bg-blue-500 text-white font-bold shadow-lg py-1 px-2 rounded mr-2" onClick={() => hadleEditSelectedUser(user) }>
                     Edit
                   </button>
                   <button className="bg-red-700 hover:bg-red-500 text-white font-bold py-1 px-2 shadow-lg rounded">
@@ -62,6 +109,13 @@ const UserTableView = () => {
           })}
         </tbody>
       </table>
+      {/* Modal for Adding/Editing User */}
+       <UserFormModal
+        isOpen={isUserModalOpen}
+        onClose={handleCloseUserFormModal}
+        onSubmit={handleUserFormSubmit}
+        userValue={editSelectedUser}
+      /> 
     </div>
   );
 };
