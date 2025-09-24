@@ -1,9 +1,10 @@
-import "./App.css";
+
+import UserPage from "./pages/UserPage";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Tacnique User Management Dashboard</h1>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <UserPage/>
     </div>
   );
 }
