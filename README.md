@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# Tacnique User Management Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A user management dashboard built with **React** and **Tailwind CSS**. This dashboard allows you to view, search, filter, add, and edit users, with data integration via API.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Project Overview
 
-### `npm start`
+- **User Table:** View users with columns for ID, first name, last name, email, and department(Which is company.name).
+- **Search & Filter:** Search users and filter by first name, last name, email, or department.
+- **Add/Edit User:** Add new users or edit existing ones via a modal form.
+- **API Integration:** Fetch and post user data using Axios.
+- **Responsive UI:** Built with Tailwind CSS for a modern, responsive design.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Setup Steps
 
-### `npm test`
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/DeepakTayde/tacnique-user-management-dashboard.git
+   cd tacnique-user-management-dashboard
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies**
+   ```sh
+   npm install
+   ```
 
-### `npm run build`
+3. **Environment variables**
+   - Create a `.env` file in the root (if you want to override the default API endpoint).
+   - Example:
+     ```
+     REACT_APP_USER_API_ENDPOINT=https://jsonplaceholder.typicode.com/users
+     ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Start the development server**
+   ```sh
+   npm start
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. **Build for production**
+   ```sh
+   npm run build
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🧑‍💻 Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **View Users:** Users are listed in a table with sorting and pagination.
+- **Search/Filter:** Use the search bar and filter panel to find users.
+- **Add User:** Click the "Add User" button to open the modal and submit the form.
+- **Edit User:** Click the "Edit" button in the table to open the modal with pre-filled data.
+- **Delete User:** (If implemented) Click the "Delete" button to remove a user.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## ⚙️ .env Variables
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Variable                      | Description                        | Default Value                                      |
+|-------------------------------|------------------------------------|----------------------------------------------------|
+| REACT_APP_USER_API_ENDPOINT   | API endpoint for user data         | https://jsonplaceholder.typicode.com/users         |
 
-## Learn More
+**Note:** If `.env` is not set, the default endpoint in `src/services/api.js` will be used.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📦 Folder Structure
 
-### Code Splitting
+```
+src/
+  components/
+    HeaderComponent.jsx
+    UserFormModal.jsx
+    UserTableView.jsx
+    FilterPopup.jsx
+    SearchBar.jsx
+  pages/
+    UserPage.jsx
+  services/
+    api.js
+  App.js
+  index.js
+  index.css
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 📝 Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `npm start` — Run the app in development mode.
+- `npm run build` — Build the app for production.
+- `npm test` — Run tests (if implemented).
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📄 License
 
-### Advanced Configuration
+This project is for educational/demo purposes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🙏 Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Axios](https://axios-http.com/)
+- [JSONPlaceholder](https://jsonplaceholder.typicode.com/) (for demo API)
