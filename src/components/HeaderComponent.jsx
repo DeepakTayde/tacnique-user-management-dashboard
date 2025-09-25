@@ -17,9 +17,7 @@ const HeaderComponent = () => {
     <div className='flex justify-between items-center p-4 border-b border-primary w-full  '>
         <h1 className='text-primary font-bold text-lg '>Tecnique User Management Dashboard</h1>
         <button className='bg-primary text-white font-bold text-lg px-3 py-2 rounded-md ' onClick={handleAddUser}>Add User</button>
-        <UserFormModal isOpen={isUserModalOpen} onClose={handleCloseModal} 
-
-        />
+        <UserFormModal isOpen={isUserModalOpen} onClose={handleCloseModal} />
         </div>
   )
 }
