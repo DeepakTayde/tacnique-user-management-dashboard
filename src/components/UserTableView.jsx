@@ -91,7 +91,7 @@ const UserTableView = ({ users, setUsers }) => {
                 <td className="py-2 px-4 border">{user.company.name}</td>
                 <td className="py-2 px-4 border text-center">
                   <button
-                    className="bg-blue-700 hover:bg-blue-500 text-white font-bold shadow-lg py-1 px-2 rounded mr-2"
+                    className="bg-secondary hover:bg-blue-500 text-white font-bold shadow-lg py-1 px-2 rounded mr-2"
                     onClick={() => handleEditSelectedUser(user)}
                   >
                     Edit

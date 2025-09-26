@@ -44,11 +44,11 @@ const FilterPopup = ({ onApplyFilters, onResetFilters }) => {
 
   return (
     <form
-      className="w-full h-full flex flex-col gap-1 bg-white rounded-lg p-4 shadow"
+      className="w-full text-primary flex flex-col gap-1 bg-white rounded-lg p-4 shadow"
       onSubmit={handleApplyFilters}
     >
-      <h2 className="text-lg font-semibold mb-4">Filter Users</h2>
-      <div className="flex justify-between gap-2">
+      <h2 className="text-lg  font-semibold mb-4">Filter Users</h2>
+      <div className="flex flex-col gap-2">
         <label htmlFor="firstName">
           First Name
           <input
@@ -57,6 +57,7 @@ const FilterPopup = ({ onApplyFilters, onResetFilters }) => {
             id=""
             value={filters.firstName}
             onChange={handleChange}
+            className="w-full  p-1 rounded border"
           />
         </label>
         <label htmlFor="lastName">
@@ -67,6 +68,7 @@ const FilterPopup = ({ onApplyFilters, onResetFilters }) => {
             id=""
             value={filters.lastName}
             onChange={handleChange}
+            className="w-full  p-1 rounded border"
           />
         </label>
 
@@ -78,6 +80,7 @@ const FilterPopup = ({ onApplyFilters, onResetFilters }) => {
             id=""
             value={filters.email}
             onChange={handleChange}
+            className="w-full  p-1 rounded border"
           />
         </label>
 
@@ -94,13 +97,13 @@ const FilterPopup = ({ onApplyFilters, onResetFilters }) => {
       <div className="flex justify-between mt-2">
         <button
           type="submit"
-          className="bg-secondary text-white rounded px-4 py-2 shadow"
+          className="bg-secondary text-white rounded px-2 py-2 shadow"
         >
           Apply Filters
         </button>
         <button
           type="button"
-          className="bg-gray-500 text-white px-4 py-2 shadow rounded"
+          className="bg-gray-500 text-white px-2 py-2 shadow rounded"
           onClick={handleResetFilters}
         >
           Reset
